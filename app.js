@@ -1,6 +1,6 @@
 import express from 'express'
 
-import {getNotes, getNote, createNote, deleteNote} from './database.js'
+import {getComics, getComic, AddComic, deleteComic} from './database.js'
 
 const app = express()
 
@@ -9,23 +9,23 @@ app.use(express.json())
 app.set("view engine", "ejs")
 app.use(express.urlencoded({extended:true}))
 
-app.get("/notes", async (req,res) => {
+app.get("/ComicBooks", async (req,res) => {
   const searchTerm = req.query.searchTerm;
-  const notes = await getNotes(searchTerm);
+  const comics = await getComics(searchTerm);
   res.render("HomePage.ejs",{
-    notes,
+    comics,
   });
 })
 
-app.get("/notes/:id", async (req,res) => {
+app.get("/ComicBooks/:id", async (req,res) => {
   const id = req.params.id
-  const note = await getNote(id);
-  if(!note){
+  const comic = await getComic(id);
+  if(!comic){
     res.status(404).render("ERPage.ejs")
     return
   }
   res.render("SinglePage.ejs",{
-    note
+    comic
   });
   
 })
@@ -34,17 +34,17 @@ app.use("/creation", (req,res)=>{
   res.render('Creation.ejs')
 })
 
-app.post("/Cnotes",async (req,res) => {
+app.post("/AddBooks",async (req,res) => {
   const {title, contents} = req.body
-await createNote(title,contents)
-res.redirect("/notes")
+await AddComic(title,contents)
+res.redirect("/ComicBooks")
 })
 
 
-app.post("/notes/:id/delete",async (req,res) => {
+app.post("/ComicBooks/:id/delete",async (req,res) => {
 const id = req.params.id
-await deleteNote(id)
-res.redirect("/notes")
+await deleteComic(id)
+res.redirect("/ComicBooks")
 })
 
 app.use((err, req , res, next) =>{

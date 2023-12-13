@@ -13,14 +13,14 @@
   
   
     
-      <h2> <%= note.title %></h2>
-      <p><%= note.content %></p>
-      <a href="/notes">Back</a>
+      <h2> <%= comic.title %></h2>
+      <p><%= comic.contents %></p>
+      <a href="/ComicBooks">Back</a>
     
-      <form action="/notes/<%= note.id%>/delete" method="POST">
+      <form action="/ComicBooks/<%= comic.id%>/delete" method="POST">
       <button type="submit">delete</button>
       </form>
       
 
 </body>
-</html>
+</html> 

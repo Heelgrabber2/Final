@@ -12,7 +12,7 @@
   
   <br><br><br>
   <div>
-    <form action="/notes" method="GET">
+    <form action="/ComicBooks" method="GET">
       <label for="sinput">Search</label>
      <input type="text" placeholder="search by name" id="sinput" name="searchTerm">
      <button id="search-btn">Search</button>
@@ -22,14 +22,14 @@
   </div>
 
   <ul>
-  <% notes.forEach( note =>{ %>
+  <% comics.forEach( comic =>{ %>
     <li>
-      <h2> <%= note.title %></h2>
-      <p><%= note.content %></p>
-      <a href="/notes/<%= note.id %>">View more</a>
+      <h2> <%= comic.title %></h2>
+      <p><%= comic.content %></p>
+      <a href="/ComicBooks/<%= comic.id %>">View more</a>
     </li>
    <% }) %>
   </ul>
 
 </body>
-</html>
+</html> 

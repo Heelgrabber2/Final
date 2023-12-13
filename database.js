@@ -12,42 +12,42 @@ const pool = mysql.createPool({
 }).promise()
 
 
-export async function getNotes(searchTerm){
+export async function getComics(searchTerm){
   if(!searchTerm){
-  const [rows] = await pool.query('SELECT * FROM notes')
+  const [rows] = await pool.query('SELECT * FROM comiclist')
   return rows;
   }
   else{
     const [rows] = await pool.query(`
     SELECT * 
-    FROM notes
+    FROM comiclist
     WHERE title LIKE ?`, [searchTerm +'%'])
   return rows;
   }
 }
 
-export async function getNote(id){
+export async function getComic(id){
   const [rows] = await pool.query(`
   SELECT * FROM 
-  notes WHERE 
+  comiclist WHERE 
   id = ?
   `,[id])
   return rows[0]
 }
 
-export async function createNote(title, content){
+export async function AddComic(title, content){
   const result = await pool.query(`
-  INSERT INTO notes (title, contents) 
+  INSERT INTO comiclist (title, contents) 
   VALUES (?, ?)
   `, [title,content])
   const id = result.insertId
-  return getNote(id)
+  return getComic(id)
 }
 
-export async function deleteNote(id){
+export async function deleteComic(id){
   const result = await pool.query(`
   DELETE FROM 
-  notes WHERE 
+  comiclist WHERE 
   id = ?
   `, [id])
 }
