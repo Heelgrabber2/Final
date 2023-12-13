@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="Stylesheet.css">
+  
+</head>
+<body>
+  <a  href="/creation"> ADD</a> 
+  
+  <br><br><br>
+  <div>
+    <form action="/notes" method="GET">
+      <label for="sinput">Search</label>
+     <input type="text" placeholder="search by name" id="sinput" name="searchTerm">
+     <button id="search-btn">Search</button>
+    </form>
+     
+     
+  </div>
+
+  <ul>
+  <% notes.forEach( note =>{ %>
+    <li>
+      <h2> <%= note.title %></h2>
+      <p><%= note.content %></p>
+      <a href="/notes/<%= note.id %>">View more</a>
+    </li>
+   <% }) %>
+  </ul>
+
+</body>
+</html>

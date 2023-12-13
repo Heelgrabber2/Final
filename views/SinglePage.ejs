@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="Stylesheet.css">
+  
+</head>
+<body>
+  
+
+  
+  
+    
+      <h2> <%= note.title %></h2>
+      <p><%= note.content %></p>
+      <a href="/notes">Back</a>
+    
+      <form action="/notes/<%= note.id%>/delete" method="POST">
+      <button type="submit">delete</button>
+      </form>
+      
+
+</body>
+</html>

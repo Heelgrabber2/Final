@@ -12,9 +12,18 @@ const pool = mysql.createPool({
 }).promise()
 
 
-export async function getNotes(){
+export async function getNotes(searchTerm){
+  if(!searchTerm){
   const [rows] = await pool.query('SELECT * FROM notes')
   return rows;
+  }
+  else{
+    const [rows] = await pool.query(`
+    SELECT * 
+    FROM notes
+    WHERE title LIKE ?`, [searchTerm +'%'])
+  return rows;
+  }
 }
 
 export async function getNote(id){
@@ -35,3 +44,10 @@ export async function createNote(title, content){
   return getNote(id)
 }
 
+export async function deleteNote(id){
+  const result = await pool.query(`
+  DELETE FROM 
+  notes WHERE 
+  id = ?
+  `, [id])
+}
