@@ -7,6 +7,10 @@ import {getNotes, getNote, createNote} from './database.js'
 const app = express()
 app.use(express.json())
 
+app.use(express.static("public"))
+
+
+
 app.get("/notes", async (req,res) => {
   const notes = await getNotes();
   res.send(notes)
